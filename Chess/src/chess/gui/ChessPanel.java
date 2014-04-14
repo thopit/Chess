@@ -7,9 +7,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.LinkedList;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import chess.logic.Board;
@@ -57,61 +58,35 @@ public class ChessPanel extends JPanel implements GameChangedListener {
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
         
+        //TODO Less images with transparency
         try {
-        	ImageIcon image = new ImageIcon(this.getClass().getResource("/res/field_White.png"));
-        	field_White = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/field_Black.png"));
-        	field_Black = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/pawn_White_0.png"));
-        	pawn_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/pawn_White_1.png"));
-        	pawn_White[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/rook_White_0.png"));
-        	rook_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/rook_White_1.png"));
-        	rook_White[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/knight_White_0.png"));
-        	knight_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/knight_White_1.png"));
-        	knight_White[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/bishop_White_0.png"));
-        	bishop_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/bishop_White_1.png"));
-        	bishop_White[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/queen_White_0.png"));
-        	queen_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/queen_White_1.png"));
-        	queen_White[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/king_White_0.png"));
-        	king_White[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/king_White_1.png"));
-        	king_White[1] = image.getImage();
+        	field_White = ImageIO.read(new File("res/field_White.png"));
+        	field_Black = ImageIO.read(new File("res/field_Black.png"));
+        	pawn_White[0] = ImageIO.read(new File("res/pawn_White_0.png"));
+        	pawn_White[1] = ImageIO.read(new File("res/pawn_White_1.png"));
+        	rook_White[0] = ImageIO.read(new File("res/rook_White_0.png"));
+        	rook_White[1] = ImageIO.read(new File("res/rook_White_1.png"));
+        	knight_White[0] = ImageIO.read(new File("res/knight_White_0.png"));
+        	knight_White[1] = ImageIO.read(new File("res/knight_White_1.png"));
+        	bishop_White[0] = ImageIO.read(new File("res/bishop_White_0.png"));
+        	bishop_White[1] = ImageIO.read(new File("res/bishop_White_1.png"));
+        	queen_White[0] = ImageIO.read(new File("res/queen_White_0.png"));
+        	queen_White[1] = ImageIO.read(new File("res/queen_White_1.png"));
+        	king_White[0] = ImageIO.read(new File("res/king_White_0.png"));
+        	king_White[1] = ImageIO.read(new File("res/king_White_1.png"));
         	
-        	
-        	image = new ImageIcon(this.getClass().getResource("/res/pawn_Black_0.png"));
-        	pawn_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/pawn_Black_1.png"));
-        	pawn_Black[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/rook_Black_0.png"));
-        	rook_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/rook_Black_1.png"));
-        	rook_Black[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/knight_Black_0.png"));
-        	knight_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/knight_Black_1.png"));
-        	knight_Black[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/bishop_Black_0.png"));
-        	bishop_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/bishop_Black_1.png"));
-        	bishop_Black[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/queen_Black_0.png"));
-        	queen_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/queen_Black_1.png"));
-        	queen_Black[1] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/king_Black_0.png"));
-        	king_Black[0] = image.getImage();
-        	image = new ImageIcon(this.getClass().getResource("/res/king_Black_1.png"));
-        	king_Black[1] = image.getImage();
+        	pawn_Black[0] = ImageIO.read(new File("res/pawn_Black_0.png"));
+        	pawn_Black[1] = ImageIO.read(new File("res/pawn_Black_1.png"));
+        	rook_Black[0] = ImageIO.read(new File("res/rook_Black_0.png"));
+        	rook_Black[1] = ImageIO.read(new File("res/rook_Black_1.png"));
+        	knight_Black[0] = ImageIO.read(new File("res/knight_Black_0.png"));
+        	knight_Black[1] = ImageIO.read(new File("res/knight_Black_1.png"));
+        	bishop_Black[0] = ImageIO.read(new File("res/bishop_Black_0.png"));
+        	bishop_Black[1] = ImageIO.read(new File("res/bishop_Black_1.png"));
+        	queen_Black[0] = ImageIO.read(new File("res/queen_Black_0.png"));
+        	queen_Black[1] = ImageIO.read(new File("res/queen_Black_1.png"));
+        	king_Black[0] = ImageIO.read(new File("res/king_Black_0.png"));
+        	king_Black[1] = ImageIO.read(new File("res/king_Black_1.png"));
         }
         catch(Exception e) {
         	System.err.println("Can't load image");
