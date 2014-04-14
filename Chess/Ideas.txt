@@ -1,0 +1,3 @@
+http://chessprogramming.wikispaces.com/
+
+http://de.wikipedia.org/wiki/Minimax-Algorithmus
