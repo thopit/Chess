@@ -8,7 +8,7 @@ import de.thomas.chess.logic.GameLogic;
 
 /**
  * Main class of the chess game
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public class ChessMain {

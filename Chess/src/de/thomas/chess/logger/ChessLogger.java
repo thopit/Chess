@@ -5,6 +5,11 @@ import de.thomas.chess.logic.GameLogic;
 import de.thomas.chess.logic.GameMessage;
 import de.thomas.chess.logic.Move;
 
+/**
+ * Logs moves and prints them
+ * @author Thomas Opitz
+ *
+ */
 public class ChessLogger implements GameChangedListener {
 	private boolean active;
 	

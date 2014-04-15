@@ -2,7 +2,7 @@ package de.thomas.chess.logic;
 
 /**
  * Interface describing classes listening to game events
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public interface GameChangedListener {

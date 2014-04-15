@@ -7,7 +7,7 @@ import de.thomas.chess.logic.GameLogic;
 
 /**
  * GUI frame of the chess game
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 @SuppressWarnings("serial")

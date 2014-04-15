@@ -22,7 +22,7 @@ import de.thomas.chess.logic.Position;
 
 /**
  * ChessPanel drawing the chessboard and pieces
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 @SuppressWarnings("serial")

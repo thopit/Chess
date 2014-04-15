@@ -1,8 +1,8 @@
 package de.thomas.chess.logic;
 
 /**
- * Class representing a move
- * @author Thomas
+ * Class representing the move of a piece
+ * @author Thomas Opitz
  *
  */
 public class Move {

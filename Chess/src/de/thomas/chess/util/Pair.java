@@ -1,4 +1,4 @@
-package de.thomas.chess.ai;
+package de.thomas.chess.util;
 
 public class Pair<T, U> {
 	private T left;

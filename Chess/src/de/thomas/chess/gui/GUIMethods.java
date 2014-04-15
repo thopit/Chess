@@ -11,8 +11,8 @@ import java.awt.image.ImageProducer;
 import java.awt.image.RGBImageFilter;
 
 /**
- * Utility class with several methods for the GUI
- * @author Thomas
+ * Utility class with methods for the GUI
+ * @author Thomas Opitz
  *
  */
 public class GUIMethods {

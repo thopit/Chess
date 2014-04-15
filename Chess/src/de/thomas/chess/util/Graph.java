@@ -1,4 +1,4 @@
-package de.thomas.chess.graph;
+package de.thomas.chess.util;
 
 public class Graph<T> {
 	private Node<T> root;

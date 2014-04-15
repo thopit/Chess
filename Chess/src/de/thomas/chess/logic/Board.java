@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 
 /**
- * In this class the existence and position of all pieces is stored
- * @author Thomas
+ * Existence and position of all pieces is stored here
+ * @author Thomas Opitz
  *
  */
 public class Board implements Comparable<Board> {

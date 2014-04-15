@@ -1,4 +1,4 @@
-package de.thomas.chess.graph;
+package de.thomas.chess.util;
 
 import java.util.LinkedList;
 import java.util.List;

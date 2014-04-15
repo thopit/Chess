@@ -9,10 +9,11 @@ import de.thomas.chess.logic.GameMessage;
 import de.thomas.chess.logic.Move;
 import de.thomas.chess.logic.Piece;
 import de.thomas.chess.logic.Position;
+import de.thomas.chess.util.Pair;
 
 /**
  * Main AI used
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public class T_AI extends AI {

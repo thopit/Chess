@@ -1,8 +1,8 @@
 package de.thomas.chess.logic;
 
 /**
- * Class representing a piece
- * @author Thomas
+ * Class representing a chess piece
+ * @author Thomas Opitz
  *
  */
 public class Piece {

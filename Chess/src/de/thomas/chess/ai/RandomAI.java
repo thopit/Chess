@@ -11,7 +11,7 @@ import de.thomas.chess.logic.Position;
 
 /**
  * AI that chooses it's move randomly
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public class RandomAI extends AI {

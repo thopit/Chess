@@ -2,6 +2,11 @@ package de.thomas.chess.logic;
 
 import java.util.LinkedList;
 
+/**
+ * Stores the current game and checks moves
+ * @author Thomas Opitz
+ *
+ */
 public class GameLogic {
 	private Board currentBoard;
 	private LinkedList<GameChangedListener> gameChangedListener;

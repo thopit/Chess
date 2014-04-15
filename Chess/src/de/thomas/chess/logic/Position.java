@@ -2,7 +2,7 @@ package de.thomas.chess.logic;
 
 /**
  * Class for storing the position of a piece
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public class Position {

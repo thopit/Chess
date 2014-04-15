@@ -6,7 +6,7 @@ import de.thomas.chess.logic.GameMessage;
 
 /**
  * Abstract class describing an AI
- * @author Thomas
+ * @author Thomas Opitz
  *
  */
 public abstract class AI implements GameChangedListener {

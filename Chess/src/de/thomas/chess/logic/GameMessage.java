@@ -1,5 +1,10 @@
 package de.thomas.chess.logic;
 
+/**
+ * Message containing information of change in game
+ * @author Thomas Opitz
+ *
+ */
 public class GameMessage {
 	public static final int PIECE_MOVED = 1;
 	
