@@ -82,6 +82,15 @@ public class T_AI extends AI {
 			
 		}
 		
+		if (bestMoves.size() == 0) {
+			if (logic.isCheck(player))
+				System.out.println("Check mate");
+			else
+				System.out.println("Stalemate");
+			
+			return;
+		}
+		
 		int random = (int) (Math.random() * bestMoves.size());
 
 		Move bestMove = bestMoves.get(random).getLeft();
