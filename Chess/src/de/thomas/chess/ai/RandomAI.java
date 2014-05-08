@@ -26,7 +26,6 @@ public class RandomAI extends AI {
 		if (board.getCurrentPlayer() != player)
 			return;
 		
-		System.out.println("AI turn");
 
 		LinkedList<Piece> pieces = logic.getCurrentBoard().getPieces();
 		LinkedList<Move> moves = new LinkedList<Move>();

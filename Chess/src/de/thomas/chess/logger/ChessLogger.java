@@ -1,5 +1,7 @@
 package de.thomas.chess.logger;
 
+import java.io.PrintStream;
+
 import de.thomas.chess.logic.GameChangedListener;
 import de.thomas.chess.logic.GameLogic;
 import de.thomas.chess.logic.GameMessage;
@@ -12,9 +14,11 @@ import de.thomas.chess.logic.Move;
  */
 public class ChessLogger implements GameChangedListener {
 	private boolean active;
+	private PrintStream stream;
 	
-	public ChessLogger(GameLogic logic) {
+	public ChessLogger(GameLogic logic, PrintStream stream) {
 		logic.addGameChangedListener(this);
+		this.stream = stream;
 		this.active = true;
 	}
 
@@ -26,7 +30,7 @@ public class ChessLogger implements GameChangedListener {
 		case GameMessage.PIECE_MOVED:
 			Move move = (Move) message.getContent();
 			
-			System.out.println(move);
+			stream.println(move);
 		}
 	}
 	

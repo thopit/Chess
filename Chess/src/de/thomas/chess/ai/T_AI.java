@@ -12,7 +12,8 @@ import de.thomas.chess.logic.Position;
 import de.thomas.chess.util.Pair;
 
 /**
- * Main AI used
+ * Main AI used,
+ * currently thinks ahead 1 ply and takes move that brings most reward in terms of total piece value
  * @author Thomas Opitz
  *
  */
@@ -47,21 +48,15 @@ public class T_AI extends AI {
 		
 		
 		List<Pair<Move, Integer>> bestMoves = new LinkedList<Pair<Move, Integer>>();
-		int bestNumber = -100;
+		int bestNumber = Integer.MIN_VALUE;
 		
 		for (Move move : moves) {
 			Board testBoard = board.clone();
 			
 			logic.movePiece(move.getPiece().getName(), testBoard, move.getPosition());
 			
-
-
-			//Move testMove = new Move(move.getPosition(), move.getPiece(), false);
 			
 			if (testBoard.getValue() * valueFactor >= bestNumber) {
-				
-				
-				
 				bestMoves.add(new Pair<Move, Integer>(new Move(move.getPosition(), move.getPiece(), false), testBoard.getValue() * valueFactor));
 				bestNumber = testBoard.getValue() * valueFactor;
 				
@@ -76,8 +71,6 @@ public class T_AI extends AI {
 				}
 				
 				bestMoves.removeAll(removeList);
-				
-				
 			}
 			
 		}
@@ -96,8 +89,5 @@ public class T_AI extends AI {
 		Move bestMove = bestMoves.get(random).getLeft();
 		
 		logic.movePiece(bestMove.getPiece().getName(), bestMove.getPosition());
-		
-		
 	}
-
 }

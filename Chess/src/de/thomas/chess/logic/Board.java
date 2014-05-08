@@ -119,15 +119,10 @@ public class Board implements Comparable<Board> {
 	 * @return the piece of the position if existing, else null
 	 */
 	public Piece getPieceFromPosition(Position pos) {
-		return field[pos.getPosX()][pos.getPosY()];
+		if (pos.getPosX() < 0 || pos.getPosX() >= 8 || pos.getPosY() < 0 || pos.getPosY() >= 8)
+			return null;
 		
-		/*
-		for (Piece p: pieces) {
-			if (p.getPosition().equals(pos))
-				return p;
-		}
-		return null;
-		*/
+		return field[pos.getPosX()][pos.getPosY()];
 	}
 	
 	/**
@@ -141,14 +136,6 @@ public class Board implements Comparable<Board> {
 			return null;
 		
 		return field[posX][posY];
-		
-		/*
-		for (Piece p: pieces) {
-			if (p.getPosX() == posX && p.getPosY() == posY)
-				return p;
-		}
-		return null;
-		*/
 	}
 	
 	/**

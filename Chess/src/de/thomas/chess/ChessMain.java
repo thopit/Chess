@@ -15,7 +15,7 @@ public class ChessMain {
 	public ChessMain() {
 		GameLogic logic = new GameLogic();
 		new ChessFrame(logic);
-		new ChessLogger(logic);
+		new ChessLogger(logic, System.out);
 		new T_AI(logic, 2);
 	}
 	

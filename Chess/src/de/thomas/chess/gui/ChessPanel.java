@@ -58,7 +58,7 @@ public class ChessPanel extends JPanel implements GameChangedListener {
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
         
-        //TODO Less images with transparency
+        //TODO Find pieces with transparent background
         try {
         	field_White = ImageIO.read(new File("res/field_White.png"));
         	field_Black = ImageIO.read(new File("res/field_Black.png"));
@@ -204,7 +204,6 @@ public class ChessPanel extends JPanel implements GameChangedListener {
     				else {
     					System.out.println("Can't move to this position");
     				}
-
     			}
     		}
     	}
