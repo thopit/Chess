@@ -35,7 +35,7 @@ public class RandomAI extends AI {
 				LinkedList<Position> positions = logic.getMoves(piece);
 
 				for (Position pos : positions) {
-					moves.add(new Move(pos, piece, false));
+					moves.add(new Move(piece.getPosition(), pos, piece, false));
 				}
 			}
 		}

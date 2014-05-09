@@ -577,129 +577,143 @@ public class GameLogic {
 	 */
 	public boolean movePiece(String name, Board board, Position position) {
 		Piece piece = board.getPieceByName(name);
+		Position oldPosition = piece.getPosition();
 
 		LinkedList<Position> moveList = getMoves(piece);
 		boolean taken = false;
 
 		//TODO add choice of promotion (not only queen)
 		//TODO add more information when move isn't possible or throw MoveNotPossibleException
+		
 
-		if (moveList.contains(position)) {
-			//Disable en passant
-			for (Piece p : board.getPieces()) {
-				if (p.getPlayer() == piece.getPlayer() && p.getType() == Type.PAWN) {
-					p.setEnPassantTakeable(false);
-				}
+		//Can't move there
+		if (! moveList.contains(position))
+			return false;
+		
+
+		//Disable en passant
+		for (Piece p : board.getPieces()) {
+			if (p.getPlayer() == piece.getPlayer() && p.getType() == Type.PAWN) {
+				p.setEnPassantTakeable(false);
 			}
-
-			int posX = piece.getPosX();
-			int posY = piece.getPosY();
-
-			if (board.getPieceFromPosition(position) != null) {
-				taken = true;
-				board.removePieceFromPosition(position);
-			}
-
-
-			board.movePiece(piece, position);
-
-			//Castling
-			if (piece.getNotationName() == "K") {
-
-				if (position.getPosX() == posX - 2) {
-					Piece leftRook = board.getPieceFromPosition(posX - 4, posY);
-					board.movePiece(leftRook, leftRook.getPosX() + 3, leftRook.getPosY());
-				}
-				else if (position.getPosX() == posX + 2) {
-					Piece rightRook = board.getPieceFromPosition(posX + 3, posY);
-					board.movePiece(rightRook, rightRook.getPosX() - 2, rightRook.getPosY());
-				}
-
-			}
-			else if (piece.getNotationName() == "") {
-				if (piece.getPlayer() == 1) {
-					//En passant
-					Piece pawnLeft = board.getPieceFromPosition(posX - 1, posY);
-
-					if (position.getPosX() == posX - 1 && position.getPosY() == posY - 1 
-							&& pawnLeft != null 
-							&& pawnLeft.getPlayer() != piece.getPlayer()
-							&& pawnLeft.getNotationName().equals("")) {
-
-						board.removePieceFromPosition(new Position(posX - 1, posY));
-					}
-
-					Piece pawnRight = board.getPieceFromPosition(posX + 1, posY);
-
-					if (position.getPosX() == posX + 1 && position.getPosY() == posY - 1 
-							&& pawnRight != null 
-							&& pawnRight.getPlayer() != piece.getPlayer()
-							&& pawnRight.getNotationName().equals("")) {
-
-						board.removePieceFromPosition(new Position(posX + 1, posY));
-					}
-
-					//Promotion
-					if (piece.getPosY() == 0)
-						piece.setType(Type.QUEEN);
-
-					//En passant possible
-					if (posY == piece.getPosY() + 2)
-						piece.setEnPassantTakeable(true);
-
-
-				}
-				else if (piece.getPlayer() == 2) {
-					Piece pawnLeft = board.getPieceFromPosition(posX - 1, posY);
-
-					if (position.getPosX() == posX - 1 && position.getPosY() == posY + 1 
-							&& pawnLeft != null 
-							&& pawnLeft.getPlayer() != piece.getPlayer()
-							&& pawnLeft.getNotationName().equals("")) {
-
-						board.removePieceFromPosition(new Position(posX - 1, posY));
-					}
-
-					Piece pawnRight = board.getPieceFromPosition(posX + 1, posY);
-
-					if (position.getPosX() == posX + 1 && position.getPosY() == posY + 1 
-							&& pawnRight != null 
-							&& pawnRight.getPlayer() != piece.getPlayer()
-							&& pawnRight.getNotationName().equals("")) {
-
-						board.removePieceFromPosition(new Position(posX + 1, posY));
-					}
-
-
-					//Promotion
-					if (piece.getPosY() == 7)
-						piece.setType(Type.QUEEN);
-
-					//En Passant possible
-					if (posY == piece.getPosY() - 2) {
-						piece.setEnPassantTakeable(true);
-					}
-				}
-			}
-
-			if (board.getCurrentPlayer() == 1)
-				board.setCurrentPlayer(2);
-			else
-				board.setCurrentPlayer(1);
-
-			if (board == currentBoard) {
-				for (GameChangedListener g : gameChangedListener) {
-
-
-					GameMessage msg = new GameMessage(GameMessage.PIECE_MOVED, new Move(position, piece, taken));
-					g.handleMessage(msg);
-				}
-			}
-
-
-			return true;
 		}
 
-		return false;
+
+		if (board.getPieceFromPosition(position) != null) {
+			taken = true;
+			board.removePieceFromPosition(position);
+		}
+
+		board.movePiece(piece, position);
+		
+		//Castling
+		if (piece.getNotationName() == "K") {
+			processCastlingMove(piece, board, position, oldPosition);
+		}
+		else if (piece.getNotationName() == "") {
+			if (piece.getPlayer() == 1) {
+				processPawnMoveFirstPlayer(piece, board, position, oldPosition);
+			}
+			else if (piece.getPlayer() == 2) {
+				processPawnMoveSecondPlayer(piece, board, position, oldPosition);
+			}
+		}
+
+		if (board.getCurrentPlayer() == 1)
+			board.setCurrentPlayer(2);
+		else
+			board.setCurrentPlayer(1);
+
+		if (board == currentBoard) {
+			for (GameChangedListener g : gameChangedListener) {
+				GameMessage msg = new GameMessage(GameMessage.PIECE_MOVED, new Move(oldPosition, position, piece, taken));
+				g.handleMessage(msg);
+			}
+		}
+
+		return true;
+	}
+	
+	private void processCastlingMove(Piece piece, Board board, Position position, Position oldPosition) {
+		int posX = oldPosition.getPosX();
+		int posY = oldPosition.getPosY();
+		
+		if (position.getPosX() == posX - 2) {
+			Piece leftRook = board.getPieceFromPosition(posX - 4, posY);
+			board.movePiece(leftRook, leftRook.getPosX() + 3, leftRook.getPosY());
+		}
+		else if (position.getPosX() == posX + 2) {
+			Piece rightRook = board.getPieceFromPosition(posX + 3, posY);
+			board.movePiece(rightRook, rightRook.getPosX() - 2, rightRook.getPosY());
+		}
+	}
+	
+	private void processPawnMoveFirstPlayer(Piece piece, Board board, Position position, Position oldPosition) {	
+		int posX = oldPosition.getPosX();
+		int posY = oldPosition.getPosY();
+
+		//En passant
+		Piece pawnLeft = board.getPieceFromPosition(posX - 1, posY);
+
+		if (position.getPosX() == posX - 1 && position.getPosY() == posY - 1 
+				&& pawnLeft != null 
+				&& pawnLeft.getPlayer() != piece.getPlayer()
+				&& pawnLeft.getNotationName().equals("")) {
+
+			board.removePieceFromPosition(new Position(posX - 1, posY));
+		}
+
+		Piece pawnRight = board.getPieceFromPosition(posX + 1, posY);
+
+		if (position.getPosX() == posX + 1 && position.getPosY() == posY - 1 
+				&& pawnRight != null 
+				&& pawnRight.getPlayer() != piece.getPlayer()
+				&& pawnRight.getNotationName().equals("")) {
+
+			board.removePieceFromPosition(new Position(posX + 1, posY));
+		}
+
+		//Promotion
+		if (piece.getPosY() == 0)
+			piece.setType(Type.QUEEN);
+
+		//En passant possible
+		if (posY == piece.getPosY() + 2)
+			piece.setEnPassantTakeable(true);
+	}
+
+	private void processPawnMoveSecondPlayer(Piece piece, Board board, Position position, Position oldPosition) {	
+		int posX = oldPosition.getPosX();
+		int posY = oldPosition.getPosY();
+		
+		Piece pawnLeft = board.getPieceFromPosition(posX - 1, posY);
+
+		if (position.getPosX() == posX - 1 && position.getPosY() == posY + 1 
+				&& pawnLeft != null 
+				&& pawnLeft.getPlayer() != piece.getPlayer()
+				&& pawnLeft.getNotationName().equals("")) {
+
+			board.removePieceFromPosition(new Position(posX - 1, posY));
+		}
+
+		Piece pawnRight = board.getPieceFromPosition(posX + 1, posY);
+
+		if (position.getPosX() == posX + 1 && position.getPosY() == posY + 1 
+				&& pawnRight != null 
+				&& pawnRight.getPlayer() != piece.getPlayer()
+				&& pawnRight.getNotationName().equals("")) {
+
+			board.removePieceFromPosition(new Position(posX + 1, posY));
+		}
+
+
+		//Promotion
+		if (piece.getPosY() == 7)
+			piece.setType(Type.QUEEN);
+
+		//En Passant possible
+		if (posY == piece.getPosY() - 2) {
+			piece.setEnPassantTakeable(true);
+		}
 	}
 }

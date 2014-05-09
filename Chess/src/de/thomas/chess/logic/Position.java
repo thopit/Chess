@@ -43,14 +43,14 @@ public class Position {
 		String str = "";
 		
 		switch (posX) {
-		case 0: str += "A"; break;
-		case 1: str += "B"; break;
-		case 2: str += "C"; break;
-		case 3: str += "D"; break;
-		case 4: str += "E"; break;
-		case 5: str += "F"; break;
-		case 6: str += "G"; break;
-		case 7: str += "H"; break;
+		case 0: str += "a"; break;
+		case 1: str += "b"; break;
+		case 2: str += "c"; break;
+		case 3: str += "d"; break;
+		case 4: str += "e"; break;
+		case 5: str += "f"; break;
+		case 6: str += "g"; break;
+		case 7: str += "h"; break;
 		}
 		
 		switch (posY) {
@@ -65,6 +65,11 @@ public class Position {
 		}
 		
 		return str;
+	}
+	
+	@Override
+	public Position clone() {
+		return new Position(posX, posY);
 	}
 
 }

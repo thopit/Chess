@@ -41,7 +41,7 @@ public class T_AI extends AI {
 				LinkedList<Position> positions = logic.getMoves(piece);
 
 				for (Position pos : positions) {
-					moves.add(new Move(pos, piece, false));
+					moves.add(new Move(piece.getPosition(), pos, piece, false));
 				}
 			}
 		}
@@ -57,7 +57,7 @@ public class T_AI extends AI {
 			
 			
 			if (testBoard.getValue() * valueFactor >= bestNumber) {
-				bestMoves.add(new Pair<Move, Integer>(new Move(move.getPosition(), move.getPiece(), false), testBoard.getValue() * valueFactor));
+				bestMoves.add(new Pair<Move, Integer>(new Move(move.getPiece().getPosition(), move.getPosition(), move.getPiece(), false), testBoard.getValue() * valueFactor));
 				bestNumber = testBoard.getValue() * valueFactor;
 				
 				

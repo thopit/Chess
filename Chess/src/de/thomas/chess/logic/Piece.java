@@ -55,7 +55,7 @@ public class Piece {
 		return type;
 	}
 
-	//TODO probably name should also be changed?
+	//TODO what about name?
 	public void setType(Type type) {
 		this.type = type;
 		
@@ -138,8 +138,7 @@ public class Piece {
 	
 	@Override
 	public Object clone() {
-		Piece p = new Piece(type, player, pos.getPosX(), pos.getPosY(), name);
-		return p;
+		return new Piece(type, player, pos.getPosX(), pos.getPosY(), name);
 	}
 
 }
